@@ -3,15 +3,17 @@ const exec = util.promisify(require('node:child_process').exec);
 const ping = require('ping');
 
 const hostsCmd = {
+    '192.168.99.1': [
+        {
+            cmdMount: 'net use L: \\\\192.168.99.1\\backup backup',
+            cmdUnmount: 'net use L: /delete',
+            state: 0
+        }
+    ],
     '192.168.99.15': [
         {
-            cmdMount: 'net use N: \\\\192.168.99.15\\keyn keyn',
-            cmdUnmount: 'net use N: /delete',
-            state: 0
-        },
-        {
             cmdMount: 'net use L: \\\\192.168.99.15\\web web',
-            cmdUnmount: 'net use L: /delete',
+            cmdUnmount: 'net use M: /delete',
             state: 0
         }
     ],
