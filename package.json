@@ -1,0 +1,15 @@
+{
+  "name": "hostupcmd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "ping": "^0.4.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jstarstech",
+  "license": "ISC"
+}
