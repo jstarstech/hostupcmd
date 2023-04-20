@@ -38,7 +38,7 @@ async function check() {
                 const {stdout, stderr} = await exec(cmdToExec);
 
                 if (stderr !== null) {
-                    console.log('exec error: ' + error);
+                    console.log('exec error: ' + stderr);
                 }
             } catch (e) {
                 console.log(e.toString())
