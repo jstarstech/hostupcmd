@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "ping": "^0.4.2"
+    "ping": "^0.4.4"
   },
   "scripts": {
     "start": "node app.js",
