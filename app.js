@@ -1,6 +1,8 @@
-const util = require('node:util');
-const exec = util.promisify(require('node:child_process').exec);
-const ping = require('ping');
+import util from 'node:util';
+import child_process from 'node:child_process';
+import ping from 'ping';
+
+const exec = util.promisify(child_process.exec);
 
 const hostsCmd = {
     '192.168.99.1': [
@@ -40,7 +42,7 @@ async function check() {
                 const {stdout, stderr} = await exec(cmdToExec);
 
                 if (stderr !== null) {
-                    console.log('exec error: ' + stderr);
+                    console.log(`exec error: ${stderr}`);
                 }
             } catch (e) {
                 console.log(e.toString())
