@@ -11,5 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jstarstech",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ping": "^0.4.1"
+  }
 }
