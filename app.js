@@ -1,25 +1,11 @@
 import util from 'node:util';
 import child_process from 'node:child_process';
 import ping from 'ping';
+import {getConfig} from './config.js';
 
 const exec = util.promisify(child_process.exec);
 
-const hostsCmd = {
-    '192.168.99.1': [
-        {
-            cmdMount: 'net use L: \\\\192.168.99.1\\backup backup',
-            cmdUnmount: 'net use L: /delete',
-            state: 0
-        }
-    ],
-    '192.168.99.15': [
-        {
-            cmdMount: 'net use L: \\\\192.168.99.15\\web web',
-            cmdUnmount: 'net use M: /delete',
-            state: 0
-        }
-    ],
-};
+const hostsCmd = {};
 
 async function check() {
     for (const [host, cmds] of Object.entries(hostsCmd)) {
@@ -52,6 +38,20 @@ async function check() {
 }
 
 (async () => {
+    const hosts = getConfig('hosts');
+
+    for (const host of hosts) {
+        if (!hostsCmd[host.host]) {
+            hostsCmd[host.host] = [];
+        }
+
+        hostsCmd[host.host].push({
+            cmdMount: host.cmdMount,
+            cmdUnmount: host.cmdUnmount,
+            state: 0
+        })
+    }
+
     await check();
 
     setInterval(check, 10000);
