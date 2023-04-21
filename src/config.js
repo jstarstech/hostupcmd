@@ -1,9 +1,9 @@
 import Ajv from 'ajv';
-import {readFileSync} from 'fs';
+import { readFileSync } from 'fs';
 
 const ajv = new Ajv();
 
-export default class Config {
+class Config {
     configObj = {};
     schema = {
         type: 'object',
@@ -14,38 +14,37 @@ export default class Config {
                     type: 'object',
                     properties: {
                         host: {
-                            type: 'string'
+                            type: 'string',
                         },
                         cmdMount: {
-                            type: 'string'
+                            type: 'string',
                         },
                         cmdUnmount: {
-                            type: 'string'
-                        }
+                            type: 'string',
+                        },
                     },
                     required: ['host', 'cmdMount', 'cmdUnmount'],
-                    additionalProperties: false
-                }
-            }
+                    additionalProperties: false,
+                },
+            },
         },
         required: ['hosts'],
-        additionalProperties: false
+        additionalProperties: false,
     };
 
     init() {
         try {
             const configString = readFileSync('./config.json', 'utf8');
 
-            this.configObj = JSON.parse(configString);
+            this.configObj = JSON.parse(configString.toString());
 
-
-            const validate = ajv.compile(this.schema)
-            const valid = validate(this.configObj)
+            const validate = ajv.compile(this.schema);
+            const valid = validate(this.configObj);
             if (!valid) {
-                console.log(validate.errors)
+                console.log(validate.errors);
             }
         } catch (e) {
-            console.log(e.toString())
+            console.log(e.toString());
             process.exit(1);
         }
     }
@@ -54,7 +53,7 @@ export default class Config {
         const elems = Array.isArray(property) ? property : property.split('.');
         const name = elems[0];
 
-        let value
+        let value;
 
         if (configObj === undefined) {
             value = this.configObj[name];
@@ -66,7 +65,11 @@ export default class Config {
             return value;
         }
 
-        if (value === null || typeof value !== 'object' || !Array.isArray(value)) {
+        if (
+            value === null ||
+            typeof value !== 'object' ||
+            !Array.isArray(value)
+        ) {
             return undefined;
         }
 
@@ -83,6 +86,5 @@ export function getConfig(path) {
         conf.init();
     }
 
-    return conf.get(path)
+    return conf.get(path);
 }
-

@@ -1,7 +1,7 @@
 import util from 'node:util';
 import child_process from 'node:child_process';
 import ping from 'ping';
-import {getConfig} from './config.js';
+import { getConfig } from './config.js';
 
 const exec = util.promisify(child_process.exec);
 
@@ -25,13 +25,13 @@ async function check() {
             }
 
             try {
-                const {stdout, stderr} = await exec(cmdToExec);
+                const { stderr } = await exec(cmdToExec);
 
                 if (stderr !== null) {
                     console.log(`exec error: ${stderr}`);
                 }
             } catch (e) {
-                console.log(e.toString())
+                console.log(e.toString());
             }
         }
     }
@@ -48,8 +48,8 @@ async function check() {
         hostsCmd[host.host].push({
             cmdMount: host.cmdMount,
             cmdUnmount: host.cmdUnmount,
-            state: 0
-        })
+            state: 0,
+        });
     }
 
     await check();
