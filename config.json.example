@@ -1,0 +1,9 @@
+{
+  "hosts": [
+    {
+      "host": "localhost",
+      "cmdMount": "",
+      "cmdUnmount": ""
+    }
+  ]
+}
