@@ -15,6 +15,7 @@
   "author": "jstarstech",
   "license": "ISC",
   "devDependencies": {
-    "@types/ping": "^0.4.1"
+    "@types/ping": "^0.4.1",
+    "eslint": "^8.38.0"
   }
 }
