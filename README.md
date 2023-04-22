@@ -2,9 +2,7 @@
 
 HostUpCmd is a tool to execute a command on the host up or down is detected.
 
-## Usage
-
-### Installation
+## Installation and Usage
 
 Clone repository and install dependencies:
 
@@ -25,3 +23,22 @@ Run application:
 ```shell
 npm start
 ```
+
+## Configuration
+
+Configuration file ***config.json***.
+
+All configuration properties:
+
+| Property        | Default | Description                          |
+|-----------------|:-------:|--------------------------------------|
+| hosts           |   []    | Array of ***Host*** objects          |
+| defaultInterval |  10000  | Default interval between ping probe. |
+
+***Host*** object:
+
+| Property   | Default | Description                                              |
+|------------|---------|----------------------------------------------------------|
+| host       |         | A domain or ip address of monitored host                 |
+| cmdMount   |         | A command to execute when host probe detect host is down |
+| cmdUnmount |         | A command to execute when host probe detect host is up   |
