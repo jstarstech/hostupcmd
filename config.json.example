@@ -2,8 +2,8 @@
   "hosts": [
     {
       "host": "localhost",
-      "cmdMount": "",
-      "cmdUnmount": ""
+      "cmdUp": "",
+      "cmdDown": ""
     }
   ],
   defaultInterval: 10000

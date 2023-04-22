@@ -16,14 +16,14 @@ class Config {
                         host: {
                             type: 'string',
                         },
-                        cmdMount: {
+                        cmdUp: {
                             type: 'string',
                         },
-                        cmdUnmount: {
+                        cmdDown: {
                             type: 'string',
                         },
                     },
-                    required: ['host', 'cmdMount', 'cmdUnmount'],
+                    required: ['host', 'cmdUp', 'cmdDown'],
                     additionalProperties: false,
                 },
             },

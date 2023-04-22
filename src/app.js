@@ -17,10 +17,10 @@ async function check() {
             let cmdToExec = '';
 
             if (isAlive && cmd.state === 0) {
-                cmdToExec = cmd.cmdMount;
+                cmdToExec = cmd.cmdUp;
                 cmd.state = 1;
             } else {
-                cmdToExec = cmd.cmdUnmount;
+                cmdToExec = cmd.cmdDown;
                 cmd.state = 0;
             }
 
@@ -46,8 +46,8 @@ async function check() {
         }
 
         hostsCmd[host.host].push({
-            cmdMount: host.cmdMount,
-            cmdUnmount: host.cmdUnmount,
+            cmdUp: host.cmdUp,
+            cmdDown: host.cmdDown,
             state: 0,
         });
     }
