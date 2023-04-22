@@ -54,5 +54,5 @@ async function check() {
 
     await check();
 
-    setInterval(check, 10000);
+    setInterval(check, getConfig('defaultInterval') || 10000);
 })();

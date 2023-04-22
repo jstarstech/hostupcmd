@@ -27,6 +27,9 @@ class Config {
                     additionalProperties: false,
                 },
             },
+            defaultInterval: {
+                type: 'number',
+            },
         },
         required: ['hosts'],
         additionalProperties: false,
