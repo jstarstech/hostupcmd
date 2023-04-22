@@ -24,6 +24,10 @@ async function check() {
                 cmd.state = 0;
             }
 
+            if (cmdToExec === '') {
+                return;
+            }
+
             try {
                 const { stderr } = await exec(cmdToExec);
 
