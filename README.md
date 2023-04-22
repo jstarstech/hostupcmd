@@ -37,8 +37,8 @@ All configuration properties:
 
 ***Host*** object:
 
-| Property | Default | Description                                                                 |
-|:---------|:-------:|:----------------------------------------------------------------------------|
-| host     |   ""    | Domain or ip address of monitored host   [ ***required*** ]                 |
-| cmdUp    |   ""    | A command to execute when host probe detect host is down [ ***required*** ] |
-| cmdDown  |   ""    | A command to execute when host probe detect host is up   [ ***required*** ] |
+| Property | Default | Description                                                                   |
+|:---------|:-------:|:------------------------------------------------------------------------------|
+| host     |   ""    | Domain or ip address of monitored host   [ ***required*** ]                   |
+| cmdUp    |   ""    | A command to execute when host probe detect host is up [ ***required*** ]     |
+| cmdDown  |   ""    | A command to execute when host probe detect host is down   [ ***required*** ] |
