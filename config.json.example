@@ -2,8 +2,8 @@
   "hosts": [
     {
       "host": "localhost",
-      "cmdUp": "",
-      "cmdDown": ""
+      "cmdUp": "exit 0",
+      "cmdDown": "exit 0"
     }
   ],
   "defaultInterval": 10000
