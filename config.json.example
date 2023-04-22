@@ -6,5 +6,5 @@
       "cmdDown": ""
     }
   ],
-  defaultInterval: 10000
+  "defaultInterval": 10000
 }
