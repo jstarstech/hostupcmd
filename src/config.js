@@ -43,11 +43,13 @@ class Config {
 
             const validate = ajv.compile(this.schema);
             const valid = validate(this.configObj);
+
             if (!valid) {
-                console.log(validate.errors);
+                console.log('Config error:', validate.errors);
+                process.exit(1);
             }
         } catch (e) {
-            console.log(e.toString());
+            console.log('Config error:', e.toString());
             process.exit(1);
         }
     }
