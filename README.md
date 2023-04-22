@@ -30,15 +30,15 @@ Configuration file ***config.json***.
 
 All configuration properties:
 
-| Property        | Default | Description                          |
-|-----------------|:-------:|--------------------------------------|
-| hosts           |   []    | Array of ***Host*** objects          |
-| defaultInterval |  10000  | Default interval between ping probe. |
+| Property        | Default | Description                                             |
+|:----------------|:-------:|:--------------------------------------------------------|
+| hosts           |   []    | Array of ***Host*** objects  [ ***required*** ]         |
+| defaultInterval |  10000  | Default interval between ping probe. [ ***optional*** ] |
 
 ***Host*** object:
 
-| Property   | Default | Description                                              |
-|------------|---------|----------------------------------------------------------|
-| host       |         | A domain or ip address of monitored host                 |
-| cmdMount   |         | A command to execute when host probe detect host is down |
-| cmdUnmount |         | A command to execute when host probe detect host is up   |
+| Property   | Default | Description                                                                 |
+|:-----------|:-------:|:----------------------------------------------------------------------------|
+| host       |   ""    | Domain or ip address of monitored host   [ ***required*** ]                 |
+| cmdMount   |   ""    | A command to execute when host probe detect host is down [ ***required*** ] |
+| cmdUnmount |   ""    | A command to execute when host probe detect host is up   [ ***required*** ] |
