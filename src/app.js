@@ -35,7 +35,7 @@ async function check() {
                     console.log(`exec error: ${stderr}`);
                 }
             } catch (e) {
-                console.log(e.toString());
+                console.log(`Error executing command "${cmdToExec}": ${e.toString()}`);
             }
         }
     }
