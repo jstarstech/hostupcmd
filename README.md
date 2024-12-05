@@ -1,6 +1,6 @@
 # HostUpCmd
 
-HostUpCmd is a tool to execute a command on the host up or down is detected.
+HostUpCmd is a tool to execute a command when a host is detected as up or down.
 
 ## Installation and Usage
 
@@ -26,19 +26,19 @@ $ npm start
 
 ## Configuration
 
-Configuration file ***config.json***.
+The configuration file is named **_config.json_**.
 
 All configuration properties:
 
-| Property        | Default | Description                                                             |
-|:----------------|:-------:|:------------------------------------------------------------------------|
-| hosts           |   []    | Array of ***Host*** objects  [ ***required*** ]                         |
-| defaultInterval |  10000  | Default interval between ping probe in milliseconds. [ ***optional*** ] |
+| Property        | Default | Description                                                              |
+| :-------------- | :-----: | :----------------------------------------------------------------------- |
+| hosts           |   []    | Array of **_Host_** objects. [ ***required*** ]                          |
+| defaultInterval |  10000  | Default interval between ping probes in milliseconds. [ ***optional*** ] |
 
-***Host*** object:
+**_Host_** object:
 
-| Property | Default | Description                                                                   |
-|:---------|:-------:|:------------------------------------------------------------------------------|
-| host     |   ""    | Domain or ip address of monitored host   [ ***required*** ]                   |
-| cmdUp    |   ""    | A command to execute when host probe detect host is up [ ***required*** ]     |
-| cmdDown  |   ""    | A command to execute when host probe detect host is down   [ ***required*** ] |
+| Property | Default | Description                                                              |
+| :------- | :-----: | :----------------------------------------------------------------------- |
+| host     |   ""    | Domain or IP address of the monitored host. [ ***required*** ]           |
+| cmdUp    |   ""    | Command to execute when the host is detected as up. [ ***required*** ]   |
+| cmdDown  |   ""    | Command to execute when the host is detected as down. [ ***required*** ] |
