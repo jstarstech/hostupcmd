@@ -1,27 +1,37 @@
 # HostUpCmd
 
-HostUpCmd is a tool to execute a command when a host is detected as up or down.
+HostUpCmd is a tool to monitor hosts and run commands when their state changes.
 
-## Installation and Usage
+<p align="">
+  <a href="https://www.npmjs.com/package/hostupcmd"><img src="https://img.shields.io/npm/v/hostupcmd?style=for-the-badge" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/package/hostupcmd"><img src="https://img.shields.io/npm/l/hostupcmd?style=for-the-badge" alt="MIT License" /></a>
+  <a href="https://github.com/jstarstech/hostupcmd"><img src="https://img.shields.io/badge/github-repo-blue?logo=github&style=for-the-badge" alt="Build status" /></a>
+</p>
 
-Clone repository and install dependencies:
+## Usage
+
+Run without installing globally:
 
 ```shell
-$ git clone https://github.com/jstarstech/hostupcmd
-$ cd hostupcmd
-$ npm install
+$ npx hostupcmd
 ```
 
-Copy an example configuration file and edit it for your needs:
+Or install globally from npm:
 
 ```shell
-$ cp config.json.example config.json
+$ npm install -g hostupcmd
+```
+
+Create a config file in the directory where you run the command:
+
+```shell
+$ cp "$(npm root -g)/hostupcmd/config.json.example" ./config.json
 ```
 
 Run application:
 
 ```shell
-$ npm start
+$ hostupcmd
 ```
 
 ## Configuration
@@ -42,3 +52,15 @@ All configuration properties:
 | host     |   ""    | Domain or IP address of the monitored host. [ ***required*** ]           |
 | cmdUp    |   ""    | Command to execute when the host is detected as up. [ ***required*** ]   |
 | cmdDown  |   ""    | Command to execute when the host is detected as down. [ ***required*** ] |
+
+## Development
+
+Run from a clone:
+
+```shell
+git clone https://github.com/jstarstech/hostupcmd
+cd hostupcmd
+npm install
+cp config.json.example config.json
+npm start
+```

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import util from 'node:util';
 import child_process from 'node:child_process';
 import ping from 'ping';

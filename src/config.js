@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const ajv = new Ajv();
 
@@ -37,7 +38,7 @@ class Config {
 
     init() {
         try {
-            const configString = readFileSync('./config.json', 'utf8');
+            const configString = readFileSync(join(process.cwd(), 'config.json'), 'utf8');
 
             this.configObj = JSON.parse(configString);
 
