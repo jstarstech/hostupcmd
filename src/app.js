@@ -5,7 +5,7 @@ import { getConfig } from './config.js';
 
 const exec = util.promisify(child_process.exec);
 
-const hostsCmd = {};
+const hostsCmd = Object.create(null);
 
 async function check() {
     for (const [host, cmds] of Object.entries(hostsCmd)) {
@@ -14,18 +14,18 @@ async function check() {
         console.log(`Host ${host} is ${isAlive ? 'up' : 'down'}`);
 
         for (const cmd of cmds) {
-            let cmdToExec = '';
+            const nextState = isAlive ? 1 : 0;
 
-            if (isAlive && cmd.state === 0) {
-                cmdToExec = cmd.cmdUp;
-                cmd.state = 1;
-            } else {
-                cmdToExec = cmd.cmdDown;
-                cmd.state = 0;
+            if (cmd.state === nextState) {
+                continue;
             }
 
+            const cmdToExec = isAlive ? cmd.cmdUp : cmd.cmdDown;
+
+            cmd.state = nextState;
+
             if (cmdToExec === '') {
-                return;
+                continue;
             }
 
             try {
@@ -54,11 +54,11 @@ async function check() {
         hostsCmd[host.host].push({
             cmdUp: host.cmdUp,
             cmdDown: host.cmdDown,
-            state: 0,
+            state: undefined,
         });
     }
 
     await check();
 
-    setInterval(check, getConfig('defaultInterval') || 10000);
+    setInterval(check, getConfig('defaultInterval') ?? 10000);
 })();

@@ -39,7 +39,7 @@ class Config {
         try {
             const configString = readFileSync('./config.json', 'utf8');
 
-            this.configObj = JSON.parse(configString.toString());
+            this.configObj = JSON.parse(configString);
 
             const validate = ajv.compile(this.schema);
             const valid = validate(this.configObj);
@@ -54,31 +54,8 @@ class Config {
         }
     }
 
-    get(property, configObj = undefined) {
-        const elems = Array.isArray(property) ? property : property.split('.');
-        const name = elems[0];
-
-        let value;
-
-        if (configObj === undefined) {
-            value = this.configObj[name];
-        } else {
-            value = configObj[name];
-        }
-
-        if (elems.length <= 1) {
-            return value;
-        }
-
-        if (
-            value === null ||
-            typeof value !== 'object' ||
-            !Array.isArray(value)
-        ) {
-            return undefined;
-        }
-
-        return this.get(elems.slice(1), value);
+    get(property) {
+        return this.configObj[property];
     }
 }
 
