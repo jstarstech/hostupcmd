@@ -9,7 +9,7 @@ const hostsCmd = {};
 
 async function check() {
     for (const [host, cmds] of Object.entries(hostsCmd)) {
-        const isAlive = await ping.promise.probe(host);
+        const isAlive = (await ping.promise.probe(host)).alive;
 
         console.log(`Host ${host} is ${isAlive ? 'up' : 'down'}`);
 
@@ -35,7 +35,9 @@ async function check() {
                     console.log(`exec error: ${stderr}`);
                 }
             } catch (e) {
-                console.log(`Error executing command "${cmdToExec}": ${e.toString()}`);
+                console.log(
+                    `Error executing command "${cmdToExec}": ${e.toString()}`
+                );
             }
         }
     }
