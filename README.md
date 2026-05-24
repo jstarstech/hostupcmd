@@ -22,6 +22,14 @@ Or install globally from npm:
 $ npm install -g hostupcmd
 ```
 
+Or run with Docker from GHCR:
+
+```shell
+$ docker run --rm -it \
+  -v "$PWD/config.json:/app/config.json:ro" \
+  ghcr.io/jstarstech/hostupcmd:latest
+```
+
 Create a config file in the directory where you run the command:
 
 ```shell

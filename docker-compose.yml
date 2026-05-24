@@ -1,0 +1,9 @@
+services:
+  hostupcmd:
+    build:
+      context: .
+    image: hostupcmd:local
+    container_name: hostupcmd
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json:ro
