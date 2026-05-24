@@ -36,9 +36,9 @@ class Config {
         additionalProperties: false,
     };
 
-    init() {
+    init(configPath = join(process.cwd(), 'config.json')) {
         try {
-            const configString = readFileSync(join(process.cwd(), 'config.json'), 'utf8');
+            const configString = readFileSync(configPath, 'utf8');
 
             this.configObj = JSON.parse(configString);
 
@@ -46,13 +46,17 @@ class Config {
             const valid = validate(this.configObj);
 
             if (!valid) {
-                console.log('Config error:', validate.errors);
-                process.exit(1);
+                throw new Error(`Config error: ${JSON.stringify(validate.errors)}`);
             }
         } catch (e) {
-            console.log('Config error:', e.toString());
-            process.exit(1);
+            if (e instanceof Error && e.message.startsWith('Config error:')) {
+                throw e;
+            }
+
+            throw new Error(`Config error: ${e.toString()}`);
         }
+
+        return this.configObj;
     }
 
     get(property) {
@@ -70,4 +74,10 @@ export function getConfig(path) {
     }
 
     return conf.get(path);
+}
+
+export function loadConfig(configPath = join(process.cwd(), 'config.json')) {
+    const conf = new Config();
+
+    return conf.init(configPath);
 }
