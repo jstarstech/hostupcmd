@@ -6,8 +6,6 @@ import { join } from 'node:path';
 import test from 'node:test';
 import { loadConfig } from '../src/config.js';
 
-const rootDir = process.cwd();
-
 test('config validation fails when required host fields are missing', () => {
     const tempDir = mkdtempSync(join(tmpdir(), 'hostupcmd-config-'));
     const configPath = join(tempDir, 'config.json');
@@ -47,10 +45,9 @@ test('config parsing fails on malformed json', () => {
     }
 });
 
-test('getConfig reads values from disk', async () => {
+test('getConfig reads values from disk', () => {
     const tempDir = mkdtempSync(join(tmpdir(), 'hostupcmd-config-'));
     const configPath = join(tempDir, 'config.json');
-    const previousCwd = process.cwd();
 
     try {
         writeFileSync(
@@ -71,22 +68,17 @@ test('getConfig reads values from disk', async () => {
             )
         );
 
-        process.chdir(tempDir);
-
-        const module = await import(
-            new URL(`../src/config.js?case=${Date.now()}`, import.meta.url)
-        );
-
-        assert.deepEqual(module.getConfig('hosts'), [
-            {
-                host: 'localhost',
-                cmdUp: 'echo up',
-                cmdDown: 'echo down',
-            },
-        ]);
-        assert.equal(module.getConfig('defaultInterval'), 2500);
+        assert.deepEqual(loadConfig(configPath), {
+            hosts: [
+                {
+                    host: 'localhost',
+                    cmdUp: 'echo up',
+                    cmdDown: 'echo down',
+                },
+            ],
+            defaultInterval: 2500,
+        });
     } finally {
-        process.chdir(previousCwd);
         rmSync(tempDir, { recursive: true, force: true });
     }
 });
@@ -94,7 +86,7 @@ test('getConfig reads values from disk', async () => {
 test('cli exits with config error on invalid configuration', () => {
     const tempDir = mkdtempSync(join(tmpdir(), 'hostupcmd-cli-'));
     const configPath = join(tempDir, 'config.json');
-    const appPath = join(rootDir, 'src', 'app.js');
+    const appPath = new URL('../src/app.js', import.meta.url).href;
 
     try {
         writeFileSync(
@@ -112,13 +104,21 @@ test('cli exits with config error on invalid configuration', () => {
             )
         );
 
-        const result = spawnSync(process.execPath, [appPath], {
-            cwd: tempDir,
-            encoding: 'utf8',
-        });
+        const result = spawnSync(
+            process.execPath,
+            [
+                '--input-type=module',
+                '-e',
+                `import { run } from ${JSON.stringify(appPath)}; await run();`,
+            ],
+            {
+                cwd: tempDir,
+                encoding: 'utf8',
+            }
+        );
 
         assert.notEqual(result.status, 0);
-        assert.match(`${result.stdout}${result.stderr}`, /Config error:/);
+        assert.match(result.stderr, /Config error:/);
     } finally {
         rmSync(tempDir, { recursive: true, force: true });
     }

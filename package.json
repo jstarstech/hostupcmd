@@ -8,8 +8,8 @@
     "hostupcmd": "./src/app.js"
   },
   "dependencies": {
-    "ajv": "^8.17.1",
-    "ping": "^0.4.4"
+    "ajv": "^8.20.0",
+    "ping": "^1.0.0"
   },
   "scripts": {
     "start": "node src/app.js",
@@ -44,10 +44,10 @@
     "@eslint/js": "10.0.1",
     "@types/ping": "^0.4.4",
     "eslint": "10.4.0",
-    "globals": "16.3.0",
-    "prettier": "3.6.2"
+    "globals": "^17.6.0",
+    "prettier": "^3.8.3"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.13.0"
   }
 }
