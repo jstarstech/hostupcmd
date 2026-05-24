@@ -53,7 +53,7 @@ class Config {
                 throw e;
             }
 
-            throw new Error(`Config error: ${e.toString()}`);
+            throw new Error(`Config error: ${e.toString()}`, { cause: e });
         }
 
         return this.configObj;
